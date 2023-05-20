@@ -1,9 +1,13 @@
 import { Copyrigth } from '@/components/Copyrigth'
 import { EmptyMemories } from '@/components/EmptyMemories'
 import { Hero } from '@/components/Hero'
+import { Profile } from '@/components/Profile'
 import { Signin } from '@/components/Signin'
+import { cookies } from 'next/dist/client/components/headers'
 
 export default function Home() {
+  const isAuthenticated = cookies().has('token')
+
   return (
     <main className="grid min-h-screen grid-cols-2">
       <div className="relative flex flex-col items-start justify-between overflow-hidden border-r border-white/10 bg-[url(../assets/bg-stars.svg)] px-28 py-16 ">
@@ -13,7 +17,7 @@ export default function Home() {
         {/* Stripes */}
         <div className=" absolute bottom-0 right-2 top-0 w-2  bg-stripes"></div>
 
-        <Signin />
+        {isAuthenticated ? <Profile /> : <Signin />}
         <Hero />
         <Copyrigth />
       </div>
